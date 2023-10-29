@@ -1,0 +1,37 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AdvancedShaderSettings.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:AdvancedShaderSettings.Views"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AdvancedShaderSettings.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="AdvancedShaderSettings">
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+    <Design.DataContext>
+        <vm:MainViewDesignModel />
+    </Design.DataContext>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <Button DockPanel.Dock="Left" Width="28" Height="28" Margin="4"
+                    Click="OnSelectFileClick">
+                <Image/>
+            </Button>
+            <TextBlock FontSize="16" VerticalAlignment="Center" Padding="6,2,6,0" FontFamily="Courier New"
+                       Text="{Binding Path=Selected.FileName, FallbackValue=Select a Shader Settings File}"/>
+        </DockPanel>
+        <ScrollViewer>
+            <ItemsControl ItemsSource="{Binding CurrentSettingsPage.Rows, FallbackValue=''}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
+    </DockPanel>
+</Window>
